@@ -1,4 +1,4 @@
-# MachineLearningExersice
+# Pattern Recognision and Machine Learning Assignment
 By **Tzanetis Savvas** and **Zoidis Vasilis**,
 
 ## Introduction
