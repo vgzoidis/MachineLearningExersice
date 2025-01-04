@@ -1,0 +1,68 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usetheme{Berlin}
+
+\title{Pattern Recognition and Machine Learning}
+\author{\textbf{Team 5} - Tzanetis Savvas, Zoidis Vasileios}
+\date{\today}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\section{Part A}
+    \begin{frame}{Part A}
+    In this first part of the assignment, we are tasked with quantifying stress levels of video game players based on play patterns and the intensity of button presses. Given the stress index $x$, which reflects the frequency and pressure of key presses, we are tasked with implementing a \textbf{Maximum Likelihood Estimator} that should correctly predict whether a player is experiencing stress, by distinguishing between two classes $\omega_1$ (no stress) and $\omega_2$ (stress).
+    \end{frame}
+
+    \begin{frame}{Part A}
+    We are also given:
+    \begin{itemize}
+    \item The \textbf{PDF} function for the indicator $x$ \[
+    p(x|\theta) = \frac{1}{\pi(1+(x-\theta)^2)}
+    \]
+    \item The discriminant function \[
+    g(x) = \log{P(x|\hat{\theta}_1)} - \log{P(x|\hat{\theta}_2)} + \log{P(\omega_1)} - \log{P(\omega_2)}
+    \]
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Part A1}
+    The first requirement for this part of the assignment is to estimate the variables $\hat{\theta_1}$ and $\hat{\theta_2}$. In order to achieve this, we need to implement the \textbf{Log Likelihood} function: \[
+    \log{L(\theta|D) = \sum_{x \in D}\log{p(x|\theta)}}
+    \]
+    As well as define a range of candidate $\hat{\theta}$ values, which will likely contain the true $\hat{\theta}$.
+    \end{frame}
+
+\section{Part B}
+    \begin{frame}{Part B}
+        \begin{itemize}
+            \item One.
+            \item Two.
+            \item Three.
+        \end{itemize}
+    \end{frame}
+
+\section{Part C}
+    \begin{frame}{Part C}
+        \begin{itemize}
+            \item One.
+            \item Two.
+            \item Three.
+        \end{itemize}
+    \end{frame}
+
+\section{Part D}
+    \begin{frame}{Part D}
+        \begin{itemize}
+            \item One.
+            \item Two.
+            \item Three.
+        \end{itemize}
+    \end{frame}
+
+\end{document}
