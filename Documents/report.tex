@@ -6,57 +6,201 @@
 \usetheme{Berlin}
 
 \title{Pattern Recognition and Machine Learning}
-\author{Team 5}
+\author{\textbf{Team 5} - Tzanetis Savvas, Zoidis Vasileios}
 \date{\today}
 
 \begin{document}
-
 \begin{frame}
     \titlepage
 \end{frame}
 
-\section{Introduction}
-\begin{frame}{Introduction}
-    \begin{itemize}
-        \item One;
-        \item Two.
-    \end{itemize}
-\end{frame}
-
 \section{Part A}
-\begin{frame}{Part A}
+    \begin{frame}{Part A}    
+    In this first part of the assignment, we are tasked with quantifying stress levels of video game players based on play patterns
+    and the intensity of button presses. Given the stress index $x$, which reflects the frequency and pressure of key presses, we are
+    tasked with implementing a \textbf{Maximum Likelihood Estimator} that should correctly predict whether a player is experiencing
+    stress, by distinguishing between two classes $\omega_1$ (no stress) and $\omega_2$ (stress).
+    \end{frame}
+
+    \begin{frame}{Part A}
+    We are also given:
     \begin{itemize}
-        \item One.
-        \item Two.
-        \item Three.
+    \item The \textbf{PDF} function for the indicator $x$ 
+    \[
+    p(x|\theta) = \frac{1}{\pi(1+(x-\theta)^2)}
+    \]
+    \item The discriminant function
+    \[
+    g(x) = \log{P(x|\hat{\theta}_1)} - \log{P(x|\hat{\theta}_2)} + \log{P(\omega_1)} - \log{P(\omega_2)}
+    \]
     \end{itemize}
-\end{frame}
+    \end{frame}
+
+    \begin{frame}{Part A1}
+    The first requirement for this part of the assignment is to estimate the variables $\hat{\theta_1}$ and $\hat{\theta_2}$.
+    In order to achieve this, we need to implement the \textbf{Log Likelihood} function:
+    \[
+    \log{L(\theta|D) = \sum_{x \in D}\log{p(x|\theta)}}
+    \]
+    As well as define a range of candidate $\hat{\theta}$ values, which will likely contain the true $\hat{\theta}$. 
+    \end{frame}
+
+    \begin{frame}{Part A1}
+    This is done because using an approach like the gradient of $\log{L(\theta | D)}$ would be computationally expensive, as
+    this function does not have a closed-form expression. The range of $\hat{\theta}$ candidates should be a slightly wider 
+    that the range of our data \textbf{[-4.5,  4.1]} to ensure that the optimal value will be included. This range will be 
+    \textbf{[-6.0, 6.0]}.
+    \end{frame}
+
+    \begin{frame}{Part A1}
+    The estimated $\hat{\theta}_1$ and $\hat{\theta}_2$ values, as well as the $\log{p(D_1 | \theta)}$ and $\log{p(D_2 | \theta)}$, are shown in the graph below:
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\linewidth]{A1.png}
+        \label{Graph A1}
+    \end{figure}
+    \end{frame}
+
+    \begin{frame}{Part A2}
+    Next we need to classify the two datasets $D_1$ and $D_2$, using the discriminant function that was provided in the beginning:
+    \[
+    g(x) = \log{P(x|\hat{\theta}_1)} - \log{P(x|\hat{\theta}_2)} + \log{P(\omega_1)} - \log{P(\omega_2)}
+    \]
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\linewidth]{A2.png}
+        \label{Graph A2}
+    \end{figure}
+    \end{frame}
+
+    \begin{frame}{Part A2}
+    In conclusion, with the decision boundary at \textbf{$g(x) = 0$}, meaning that any point in $g(x) < 0$ is classified 
+    as \textbf{stress} and any point in $g(x) > 0$ is classified as \textbf{no stress}, we have the following results:
+    \begin{itemize}
+        \item \textbf{11} out of \textbf{12} values of the $D_1$ dataset are classified correctly.
+        \item All of the values of the $D_2$ dataset are classified correctly.
+    \end{itemize}
+    \end{frame}
 
 \section{Part B}
-\begin{frame}{Part B}
-    \begin{itemize}
-        \item One.
-        \item Two.
-        \item Three.
-    \end{itemize}
-\end{frame}
+    \begin{frame}{Part B}
+        \begin{itemize}
+            \item One.
+            \item Two.
+            \item Three.
+        \end{itemize}
+    \end{frame}
 
 \section{Part C}
-\begin{frame}{Part C}
-    \begin{itemize}
-        \item One.
-        \item Two.
-        \item Three.
-    \end{itemize}
-\end{frame}
+    \begin{frame}{Part C}
+        \begin{itemize}
+            \item One.
+            \item Two.
+            \item Three.
+        \end{itemize}
+    \end{frame}
 
 \section{Part D}
-\begin{frame}{Part D}
+    \begin{frame}{Part D}
+    In the final part of the assignment, we are tasked with training a classification model of our choice using a provided
+    dataset  \textbf{(datasetTV.csv)} and later make predictions on a test dataset \textbf{(datasetTest.csv)}. The TV dataset
+    consists of:
     \begin{itemize}
-        \item One.
-        \item Two.
-        \item Three.
+        \item \textbf{8743} samples.
+        \item \textbf{224} features per sample.
     \end{itemize}
-\end{frame}
+    While the test dataset has no labels as it is only meant to test the trained model on and has:
+    \begin{itemize}
+        \item \textbf{6955} samples.
+        \item \textbf{224} features per sample as well.
+    \end{itemize}
+    \end{frame}
 
+    \begin{frame}{Part D - Data Scaling}
+    Before fitting a model to our datasets, we must first \textbf{scale} the data of both the training and test sets.
+    This is an essential step as this ensures that all features contribute equally to the model's decision-making process,
+    as features with larger scales won't be able to dominate the learning process.
+    \end{frame}
+
+    \begin{frame}{Part D}
+    In order to choose a suitable model, we tested several different classifiers and their prediction accuracy 
+    using \textbf{5-Fold cross validation}. More specifically we tested:
+    \begin{itemize}
+        \item A \textbf{k-NN} classifier with a score of \textbf{0.81}
+        \item A \textbf{Secure Vector Machine} classifier with a score of \textbf{0.83}
+        \item A \textbf{Random Forest} classifier with a score of \textbf{0.80}
+        \item A \textbf{Decision Tree} classifier with a score of \textbf{0.72}
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Part D - Validation Score}
+    \textbf{5-Fold cross validation} is a technique commonly used for evaluating the performance of a decision model,
+    as it is great at assessing its performance on unseen data since:
+    \begin{itemize}
+        \item The dataset is divided randomly in \textbf{5} equal sized sub-sets (folds), where in each of the 5 iterations,
+        4 out of the 5 folds are used for training the model and the other is used as a test set.
+        \item After all 5 iterations are complete, we calculate the mean accuracy across all iterations.
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Part D - Validation Score}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\linewidth]{D1.png}
+        \label{Graph A2}
+    \end{figure}
+    \end{frame}
+
+    \begin{frame}{Part D}
+    The classification model we ended up choosing was a \textbf{Support Vector Machine (SVM)} classifier as it had the best 5-Fold
+    cross validation accuracy among all the other classification models we tested. The \textbf{SVM} classifier was the best option,
+    as it is able to handle high-dimensional spaces like the one in our dataset effectively, while also being less prone to
+    overfitting. Scaling the data like previously mentioned, is especially important as it ensures that the optimization
+    algorithm moves at a consistent rate for all features.
+    \end{frame}
+
+    \begin{frame}{Part D - Parameter Tuning}
+    After deciding on a model, we need to tune its parameters in order to maximize its prediction accuracy. 
+    In order to do this performed a \textbf{Grid Search} as well as a \textbf{Random Search}, since calculating
+    the accuracy of all possible combinations of parameters is very computationally expensive.
+    \end{frame}
+
+    \begin{frame}{Part D - Parameter Tuning}
+    Beginning with a \textbf{Grid Search}, the parameters that were tested, as well as their possible values are seen below:
+    \begin{itemize}
+        \item Kernel: \textbf{rbf}, \textbf{linear}.
+        \item C: \textbf{1, 10, 100}.
+        \item Gamma value $\gamma$: \textbf{scale, auto}.
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Part D - Parameter Tuning}
+    \textbf{Grid Search} on its own has some disadvantages. Since every possible combination of parameters is being tested,
+    testing a large number of possible parameters can get very computationally expensive since we are also testing combinations
+    of parameters that are unlikely to yield acceptable results.
+    \end{frame}
+
+    \begin{frame}{Part D - Parameter Tuning}
+    This is why we also used the \textbf{Random Search} technique, which allows us to define a range of possible values and 
+    test them by randomly sampling values for each parameter. While this method can be efficient, it may not always find the
+    'optimal' result because it doesn't exhaustively explore the parameter space. For this reason, it is used in conjunction with 
+    \textbf{Grid Search}, which systematically tests all possible combinations of parameters.
+    \end{frame}
+
+    \begin{frame}{Part D - Parameter Tuning}
+    Combining the results of both techniques, the optimal values that we used for our classification model where:
+    \begin{itemize}
+        \item Kernel: \textbf{rbf}.
+        \item C: \textbf{4}.
+        \item: Gamma value $\gamma$: \textbf{scale}.
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Part D - Final Results}
+    Finally, our \textbf{Support Vector Machine} classification model with specified parameters, yields acceptable results, with
+    \textbf{5-Fold cross validation} scores of: [0.864, 0.858, 0.851, 0.850, 0.839], and a mean score of \textbf{0.85}.
+    The relatively small variance in scores across each iteration of the cross-validation assures us that there is no
+    overfitting in our trained model.
+    \end{frame}
+    
 \end{document}
