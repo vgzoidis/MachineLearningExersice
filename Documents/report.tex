@@ -83,21 +83,164 @@
     \end{frame}
 
 \section{Part B}
+    \begin{frame}{Part B}    
+    In this second part of the assignment, we are again tasked with quantifying the stress level of video game players. This time however, we are asked to use the \textbf{Bayesian estimation method} since we are given the \textbf{Probability Density Function} of $\theta$:
+    $$
+    p(\theta) = \frac{1}{10\pi \left( 1 + \left(\frac{\theta}{10}\right)^2 \right)}
+    $$
+    \end{frame}
+
     \begin{frame}{Part B}
-        \begin{itemize}
-            \item One.
-            \item Two.
-            \item Three.
-        \end{itemize}
+    This means that we are now able to calculate the \textbf{a posteriori probability} of $\theta$, $P(\theta|D)$ like so:
+    $$
+    P(\theta|D)=\frac{P(\theta|D)p(\theta)}{\int_{-\infty}^{\infty} P(\theta|D)p(\theta) \, d\theta}
+    $$
+    \end{frame}
+
+    \begin{frame}{Part B1}
+    Plotting the \textbf{a posteriori probability} for each dataset \textbf{$P(\theta|D_1)$} and \textbf{$P(\theta|D_2)$} we can observe that:
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{B1.png}
+        \label{Graph B1}
+    \end{figure}
+    \end{frame}
+
+    \begin{frame}{Part B1}
+    Observations:
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\linewidth]{B1.png}
+        \label{Graph B1}
+    \end{figure}
+    The \textbf{location of the peaks} in the posterior distributions $P(\theta|D_1)$ and $P(\theta|D_2)$ shows the impact of each dataset ($D_1$ and $D_2$).
+    \end{frame}
+
+    \begin{frame}{Part B1}
+    Observations:
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\linewidth]{B1.png}
+        \label{Graph B1}
+    \end{figure}
+    The \textbf{prior} $p(\theta)$ is \textbf{broad} and \textbf{evenly distributed} across the range of $\theta$ values, indicating \textbf{little preference for any particular} $\theta$.
+    \end{frame}
+    
+    \begin{frame}{Part B1}
+    Observations:
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\linewidth]{B1.png}
+        \label{Graph B1}
+    \end{figure}
+    The \textbf{posteriors} are much \textbf{more concentrated} compared to the prior, showing how the data refines the prior belief and provides more accurate estimates of $p(\theta)$.
+    \end{frame}
+
+    \begin{frame}{Part B2}
+    At this point, we are tasked to classify the two datasets using \textbf{this discriminant function}:
+    $$
+    h(x) = \log{P(x|D_1)} - \log{P(x|D_2)} + \log{P(\omega_1)} - \log{P(\omega_2)}
+    $$
+    In order to implement this, we declare this \textbf{posterior predictive distribution} ${P(x|D)}$ as:
+    $$
+    P(x|D)={\int P(x|\theta)P(\theta|D) \, d\theta}
+    $$
+    \end{frame}
+
+    \begin{frame}{Part B2}
+    Now, we can visualize $h(x)$:
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{B2.png}
+        \label{Graph B1}
+    \end{figure}
+    \end{frame}
+
+    \begin{frame}{Part B2}
+    Observations:
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\linewidth]{B2.png}
+        \label{Graph C1}
+    \end{figure}
+    The \textbf{decision boundary} is at $h(x)=0$, and \textbf{correctly}, all the points of $D_1$ are classified \textbf{above} the decision boundary and all the points of $D_2$ are classified \textbf{below} the decision boundary.
+    \end{frame}
+
+    \begin{frame}{Part B2}
+    \fontsize{12}{13.5}{\textbf{Bayesian Estimation} vs \textbf{Maximum Likelihood} method:}
+    \hfill\break\hfill\break
+    In this specific example, the Bayesian Parameter Estimation method is preferred over the Maximum Likelihood method, since it classifies the data with \textbf{100\%} accuracy, as opposed to the Maximum Likelihood approach \textbf{91.7\%}. Most likely, this discrepancy is due to the fact that in part B we have prior knowledge about the \textbf{Probability Density Function} $\theta$.
     \end{frame}
 
 \section{Part C}
     \begin{frame}{Part C}
-        \begin{itemize}
-            \item One.
-            \item Two.
-            \item Three.
-        \end{itemize}
+        In this part, we are tasked to train a \textbf{Decision Tree Classifier} on three specific \textbf{Iris species} (Iris setosa, Iris versicolor, and Iris virginica) using the sepal length and width of each plant.
+        \hfill\break\hfill\break
+        Meaning, we have \textbf{two features} and \textbf{three classes}.
+    \end{frame}
+
+    \begin{frame}{Part C1}
+        First, we \textbf{load} the Iris dataset and \textbf{isolate} only the first two features. Subsequently, we \textbf{split} the dataset into a training and a testing set \textbf{(50\%:50\%)} and \textbf{define} random state in order to ensure reproducibility.
+        \hfill\break\hfill\break
+        Then, we \textbf{train} the Decision Tree Classifier and \textbf{evaluate} its performance for \textbf{various} depths.
+    \end{frame}
+
+    \begin{frame}{Part C1}
+        We aim to find the \textbf{best depth} of Decision Tree Classifier in regard to \textbf{accuracy}.
+        \hfill\break\hfill\break
+        After testing for depth in a range of up to 10 to avoid overfitting, we conclude that the optimal depth is \textbf{3} with \textbf{78.67\%} accuracy.
+    \end{frame}
+
+    \begin{frame}{Part C1}
+        Therefore, we use the \textbf{best model} (with a depth of 3) to classify our data:
+        \begin{figure}
+        \centering
+        \includegraphics[width=0.65\linewidth]{C1.png}
+        \label{Graph C1}
+    \end{figure}
+    \end{frame}
+
+    \begin{frame}{Part C2}
+       Now, we are tasked to \textbf{create} 100 new training sets from 50\% of the original training set each time and \textbf{train a Random Forest classifier} with 100 trees using the \textbf{Bootstrap} technique.
+    \end{frame}
+
+    \begin{frame}{Part C2}
+       First, we will need to create the \textbf{100 samples} for the Bootstrap technique ($\gamma$ = 50\%).
+       \hfill\break\hfill\break
+       Then, we can \textbf{train} the Random Forest Classifier and \textbf{evaluate} its performance for \textbf{various} depths. Similar to before, we are testing for depth in a range of up to 10 to avoid overfitting.
+    \end{frame}
+
+    \begin{frame}{Part C2}
+        We conclude that the optimal depth is \textbf{2} with \textbf{82.67\%} accuracy:
+        \begin{figure}
+        \centering
+        \includegraphics[width=0.65\linewidth]{C2.png}
+        \label{Graph C2}
+    \end{figure}
+    \end{frame}
+
+    \begin{frame}{Part C2}
+    \fontsize{12}{13.5}{\textbf{Random Forest} vs \textbf{Decision Tree} classifier:}
+    \hfill\break\hfill\break
+    We remark that the \textbf{Random Forest } slightly outperforms the \textbf{Decision Tree} classifier. More specifically, we observe a \textbf{5\% improvement} in terms of accuracy. This discrepancy is due to the nature of Decision Trees, which create \textbf{rough decision boundaries} (hard splits) and often result in \textbf{overfitting} to the training data. In contrast, Random Forests produce \textbf{smoother decision boundaries} and \textbf{less overfitting} because they \textbf{average} the predictions from multiple trees. This has the effect of mitigating the overfitting typically seen in a single Decision Tree and enabling \textbf{better generalization}.
+    \end{frame}
+
+    \begin{frame}{Part C2}
+    \fontsize{12}{13.5}{How does the \textbf{percentage $\gamma$} affect the performance of the algorithm?}
+    \hfill\break\hfill\break
+    From the analysis we did, we observe that:
+    \begin{itemize}
+        \item for \textbf{lower $\gamma$ values} (0.1, 0.2, 0.3) the accuracy varies between \textbf{0.80} and \textbf{0.81}, showing slight improvements as $\gamma$ increases.
+        \item For \textbf{higher values} (0.4 and above), accuracy \textbf{stabilizes} around \textbf{0.83},  suggesting diminishing returns in performance improvement with increasing $\gamma$.
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Part C2}
+       In general, \textbf{smaller $\gamma$ values} result in \textbf{higher bias} because each bootstrap set includes less information about the entire dataset.
+       \hfill\break\hfill\break
+       Conversely, \textbf{larger $\gamma$ values} reduce diversity among the bootstrap sets, which can \textbf{limit the ensemble's ability to mitigate variance} effectively.
+       \hfill\break\hfill\break
+       In summary, increasing $\gamma$ \textbf{up to 0.4} enhances the algorithm's performance, but \textbf{further increases have no significant impact} on accuracy.
     \end{frame}
 
 \section{Part D}
